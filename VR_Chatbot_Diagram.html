@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Project Diagrams</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvg@3.0.10/dist/browser/canvg.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .diagram-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .diagram-section h2 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .diagram-section p {
+            color: #6c757d;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .diagram-preview {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            border: 1px solid #dee2e6;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .download-btn.secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .status {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        .download-tips {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .download-tips h3 {
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        .download-tips p {
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VR Metahuman Chatbot Diagrams</h1>
+
+        <!-- Detailed Diagram -->
+        <div class="diagram-section">
+            <h2>1. Detailed Architecture Diagram</h2>
+            <p>Complete system architecture showing all 5 phases with detailed components and data flow.</p>
+            
+            <div class="diagram-preview">
+                <div class="mermaid" id="detailed-diagram">
+graph TB
+    subgraph Phase1["PHASE 1: AI BACKEND SYSTEM"]
+        A[User Voice Input] --> B[Microphone Audio Capture]
+        B --> C[Faster-Whisper STT]
+        C --> D[Text Query]
+        D --> E[Sentence Transformer Embeddings]
+        E --> F[FAISS Vector Database]
+        F --> G[RAG Retrieval System]
+        G --> H[LLM Model: Llama 3.1 or GPT-4]
+        H --> I[Generated Text Response]
+        I --> J[Coqui TTS or ElevenLabs]
+        J --> K[Audio Response Output]
+    end
+    
+    subgraph Phase2["PHASE 2: BACKEND SERVER"]
+        L[FastAPI Web Server]
+        M[WebSocket Endpoint]
+        N[REST API]
+        O[Audio Processing Module]
+        P[PyTorch Runtime Engine]
+        Q[Model Cache Storage]
+        
+        K --> M
+        M --> L
+        L --> O
+        O --> P
+        P --> Q
+    end
+    
+    subgraph Phase3["PHASE 3: UNREAL ENGINE INTEGRATION"]
+        R[Unreal Engine 5.3]
+        S[WebSocket Client Plugin]
+        T[Audio Streaming Module]
+        U[Network Communication Layer]
+        
+        S --> R
+        T --> R
+        U --> R
+        M --> S
+    end
+    
+    subgraph Phase4["PHASE 4: METAHUMAN & VR SYSTEM"]
+        V[VR Camera Rig]
+        W[Hand Controllers]
+        X[VR Microphone Input]
+        Y[MetaHuman Character]
+        Z[Animation Blueprint]
+        AA[OVRLipSync System]
+        AB[Facial Animation Blend Shapes]
+        AC[Body Gesture System]
+        AD[Spatial Audio Engine]
+        AE[Audio Playback System]
+        
+        X --> S
+        T --> AE
+        AE --> AD
+        AD --> AA
+        AA --> Z
+        Z --> AB
+        Z --> AC
+        AB --> Y
+        AC --> Y
+    end
+    
+    subgraph Phase5["PHASE 5: DEPLOYMENT ARCHITECTURE"]
+        AF[Meta Quest 3 Headset]
+        
+        AG[Option A: Cloud Deployment]
+        AH[AWS or Azure or GCP Server]
+        AI[Docker Container]
+        
+        AJ[Option B: Local PC Deployment]
+        AK[Gaming PC Server]
+        AL[Local WiFi Network]
+        
+        AM[Option C: Edge Deployment]
+        AN[Quantized Models on Quest]
+        
+        AF --> AG
+        AF --> AJ
+        AF --> AM
+        
+        AG --> AH
+        AH --> AI
+        
+        AJ --> AK
+        AK --> AL
+        
+        AM --> AN
+    end
+    
+    subgraph Tools["DEVELOPMENT TOOLS"]
+        AO[Unreal Engine 5.3+]
+        AP[Visual Studio 2022]
+        AQ[Python 3.10+]
+        AR[Node.js]
+        AS[Android Studio]
+        AT[Oculus SDK]
+    end
+    
+    A -.-> X
+    Y -.-> V
+    V -.-> AF
+    
+    style Phase1 fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    style Phase2 fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    style Phase3 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    style Phase4 fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
+    style Phase5 fill:#fce4ec,stroke:#c2185b,stroke-width:3px
+    style Tools fill:#f5f5f5,stroke:#616161,stroke-width:3px
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="download-btn secondary" onclick="downloadSVG('detailed-diagram', 'VR_Chatbot_Detailed_Architecture')">
+                    Download as SVG
+                </button>
+            </div>
+            <div id="status-detailed" class="status"></div>
+        </div>
+
+        <!-- Simplified Diagram -->
+        <div class="diagram-section">
+            <h2>2. Simplified Overview Diagram</h2>
+            <p>High-level overview showing only the main phases and key components.</p>
+            
+            <div class="diagram-preview">
+                <div class="mermaid" id="simple-diagram">
+graph TB
+    subgraph P1["PHASE 1: AI CHATBOT"]
+        A[Voice Input]
+        B[Speech to Text]
+        C[AI Model Processing]
+        D[Text to Speech]
+        E[Voice Output]
+        
+        A --> B --> C --> D --> E
+    end
+    
+    subgraph P2["PHASE 2: BACKEND SERVER"]
+        F[FastAPI Server]
+        G[WebSocket Communication]
+        H[Model Management]
+        
+        E --> G
+        G --> F
+        F --> H
+    end
+    
+    subgraph P3["PHASE 3: UNREAL ENGINE"]
+        I[Unreal Engine 5.3]
+        J[Network Integration]
+        
+        G --> J
+        J --> I
+    end
+    
+    subgraph P4["PHASE 4: METAHUMAN VR"]
+        K[MetaHuman Avatar]
+        L[Lip Sync Animation]
+        M[VR Interface]
+        
+        I --> K
+        K --> L
+        L --> M
+    end
+    
+    subgraph P5["PHASE 5: DEPLOYMENT"]
+        N[Meta Quest 3]
+        O[Cloud Server]
+        P[Local PC]
+        Q[Standalone]
+        
+        M --> N
+        N --> O
+        N --> P
+        N --> Q
+    end
+    
+    style P1 fill:#e3f2fd,stroke:#1976d2,stroke-width:4px
+    style P2 fill:#fff3e0,stroke:#f57c00,stroke-width:4px
+    style P3 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:4px
+    style P4 fill:#e8f5e9,stroke:#388e3c,stroke-width:4px
+    style P5 fill:#fce4ec,stroke:#c2185b,stroke-width:4px
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="download-btn secondary" onclick="downloadSVG('simple-diagram', 'VR_Chatbot_Simple_Overview')">
+                    Download as SVG
+                </button>
+            </div>
+            <div id="status-simple" class="status"></div>
+        </div>
+
+        <!-- Ultra Simple Diagram -->
+        <div class="diagram-section">
+            <h2>3. Ultra Simple Flow Diagram</h2>
+            <p>Minimal version showing just the main flow from user to VR experience.</p>
+            
+            <div class="diagram-preview">
+                <div class="mermaid" id="ultra-simple-diagram">
+graph LR
+    A[User Speaks] --> B[AI Processing]
+    B --> C[Backend Server]
+    C --> D[Unreal Engine]
+    D --> E[MetaHuman]
+    E --> F[VR Headset]
+    F --> A
+    
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    style B fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    style C fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    style D fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
+    style E fill:#fce4ec,stroke:#c2185b,stroke-width:3px
+    style F fill:#ffe6e6,stroke:#d32f2f,stroke-width:3px
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="download-btn secondary" onclick="downloadSVG('ultra-simple-diagram', 'VR_Chatbot_Flow')">
+                    Download as SVG
+                </button>
+            </div>
+            <div id="status-ultra" class="status"></div>
+        </div>
+
+        <div class="download-tips">
+            <h3>Download Tips</h3>
+            <p>PNG format is best for presentations and documents. SVG format is best for editing and scaling.</p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+
+        async function downloadDiagram(elementId, filename) {
+            const statusId = 'status-' + elementId.split('-')[0];
+            const statusDiv = document.getElementById(statusId);
+            
+            try {
+                statusDiv.className = 'status success';
+                statusDiv.textContent = 'Generating PNG...';
+
+                const element = document.getElementById(elementId);
+                const svgElement = element.querySelector('svg');
+                
+                if (!svgElement) {
+                    throw new Error('Diagram not found');
+                }
+
+                const svgData = new XMLSerializer().serializeToString(svgElement);
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+
+                const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(svgBlob);
+
+                // Use canvg directly without Image to avoid timing issues
+                canvas.width = 800;
+                canvas.height = 800;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                // Check if canvg is available
+                if (typeof canvg === "undefined") {
+                    statusDiv.textContent = '❌ Error: canvg library failed to load! PNG download cannot work.';
+                    return;
+                }
+                // v3 syntax
+                canvg(canvas, svgData, {
+                    ignoreAnimation: true,
+                    ignoreMouse: true,
+                    ignoreClear: true,
+                    scaleWidth: canvas.width,
+                    scaleHeight: canvas.height,
+                    renderCallback: function() {
+                        canvas.toBlob(function(blob) {
+                            const link = document.createElement('a');
+                            link.download = filename + '.png';
+                            link.href = URL.createObjectURL(blob);
+                            link.click();
+    
+                            statusDiv.textContent = '✅ PNG downloaded successfully!';
+                            setTimeout(() => {
+                                statusDiv.style.display = 'none';
+                            }, 3000);
+                        });
+    
+                        URL.revokeObjectURL(url);
+                    }
+                });
+            } catch (error) {
+                statusDiv.className = 'status';
+                statusDiv.style.background = '#f8d7da';
+                statusDiv.style.color = '#721c24';
+                statusDiv.style.border = '1px solid #f5c6cb';
+                statusDiv.style.display = 'block';
+                statusDiv.textContent = '❌ Error: ' + error.message;
+            }
+        }
+
+        function downloadSVG(elementId, filename) {
+            const statusId = 'status-' + elementId.split('-')[0];
+            const statusDiv = document.getElementById(statusId);
+            
+            try {
+                statusDiv.className = 'status success';
+                statusDiv.textContent = 'Generating SVG...';
+
+                const element = document.getElementById(elementId);
+                const svgElement = element.querySelector('svg');
+                
+                if (!svgElement) {
+                    throw new Error('Diagram not found');
+                }
+
+                const svgData = new XMLSerializer().serializeToString(svgElement);
+                const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.download = filename + '.svg';
+                link.href = url;
+                link.click();
+                
+                URL.revokeObjectURL(url);
+                
+                statusDiv.textContent = '✅ SVG downloaded successfully!';
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 3000);
+            } catch (error) {
+                statusDiv.className = 'status';
+                statusDiv.style.background = '#f8d7da';
+                statusDiv.style.color = '#721c24';
+                statusDiv.style.border = '1px solid #f5c6cb';
+                statusDiv.style.display = 'block';
+                statusDiv.textContent = '❌ Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
